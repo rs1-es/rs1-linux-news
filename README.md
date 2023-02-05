@@ -14,4 +14,8 @@ This is the source code of https://news.rs1.es. Python script parses feeds (RSS/
 
 ### Generate pages
 
-Simply run the python scripts (e.g.: `python parser-en.py`) and upload files inside "public" to a server, a hosting service, etc.
+Simply run the python scripts (e.g.: `python parser-en.py`) periodically and upload files inside "public" to a server, a hosting service, etc.
+
+### Contribute
+
+Create an issue if you want to add a page. Provide the feed link.
