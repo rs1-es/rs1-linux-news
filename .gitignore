@@ -1,0 +1,9 @@
+parser-testing.py
+run.sh
+public/de/**
+public/es/**
+public/fr/**
+public/more/**
+public/pt/**
+public/videos/**
+public/index.html
