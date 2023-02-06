@@ -296,7 +296,8 @@ videosFeedsInfo = [
 
 #MORE
 moreFeedsInfo = [
-    ["https://www.howtoforge.de/feed/", "HowtoForge", "https://www.howtoforge.de/", "%a, %d %b %Y %H:%M:%S %z"]
+    ["https://www.howtoforge.de/feed/", "HowtoForge", "https://www.howtoforge.de/", "%a, %d %b %Y %H:%M:%S %z"],
+    ["https://linux-content.org/feed/", "Linux Content", "https://linux-content.org/", "%a, %d %b %Y %H:%M:%S %z"]
 ]
 
 newsFeeds = []
