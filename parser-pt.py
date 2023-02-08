@@ -7,7 +7,12 @@ import func_timeout
 def parseFeed(url, author, homeURL, parseDate, globalFeed):
     d = feedparser.parse(url)
     for entry in d.entries:
-        dt = datetime.datetime.strptime(entry.published, parseDate)
+        dt = 0
+        try:
+            dt = datetime.datetime.strptime(entry.published, parseDate)
+        except ValueError:
+            print(entry.published + " does not follow " + parseDate)
+            continue
         entry.published = dt.isoformat()
         globalFeed.append([entry.title, entry.link, entry.published, author, homeURL, dt.timestamp()])
 
@@ -288,7 +293,10 @@ newsFeedsInfo = [
 
 #VIDEOS
 videosFeedsInfo = [
-    ["https://odysee.com/$/rss/@livreeaberto:f", "é Livre e Aberto (Videos)", "https://odysee.com/@livreeaberto:f", "%a, %d %b %Y %H:%M:%S %Z"]
+    ["https://odysee.com/$/rss/@livreeaberto:f", "é Livre e Aberto (Videos)", "https://odysee.com/@livreeaberto:f", "%a, %d %b %Y %H:%M:%S %Z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCEf5U1dB5a2e2S-XUlnhxSA", "Diolinux (Videos)", "https://www.youtube.com/@Diolinux/videos", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UC-As6gR1nl8nxcyJck20u3w", "Zer01TI", "https://www.youtube.com/@Zer01TI/videos", "%Y-%m-%dT%H:%M:%S%z"]
+
 
 ]
 

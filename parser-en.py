@@ -13,7 +13,8 @@ def parseFeed(url, author, homeURL, parseDate, globalFeed):
         try:
             dt = datetime.datetime.strptime(entry.published, parseDate)
         except ValueError:
-            dt = datetime.datetime.strptime(entry.published, "%Y-%m-%dT%H:%M:%S%z")
+            print(entry.published + " does not follow " + parseDate)
+            continue
         entry.published = dt.isoformat()
         globalFeed.append([entry.title, entry.link, entry.published, author, homeURL, dt.timestamp()])
 

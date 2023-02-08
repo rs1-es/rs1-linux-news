@@ -7,7 +7,12 @@ import func_timeout
 def parseFeed(url, author, homeURL, parseDate, globalFeed):
     d = feedparser.parse(url)
     for entry in d.entries:
-        dt = datetime.datetime.strptime(entry.published, parseDate)
+        dt = 0
+        try:
+            dt = datetime.datetime.strptime(entry.published, parseDate)
+        except ValueError:
+            print(entry.published + " does not follow " + parseDate)
+            continue
         entry.published = dt.isoformat()
         globalFeed.append([entry.title, entry.link, entry.published, author, homeURL, dt.timestamp()])
 
@@ -291,13 +296,16 @@ newsFeedsInfo = [
 
 #VIDEOS
 videosFeedsInfo = [
-    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCHZyqB9qHGGGw5QeRVEbQDg", "Linux Guides DE", "https://www.youtube.com/channel/UCHZyqB9qHGGGw5QeRVEbQDg/videos", "%Y-%m-%dT%H:%M:%S%z"]
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCHZyqB9qHGGGw5QeRVEbQDg", "Linux Guides DE", "https://www.youtube.com/channel/UCHZyqB9qHGGGw5QeRVEbQDg/videos", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCbvvtG9I_hrfSqT9PfXFXtw", "MichlFranken", "https://www.youtube.com/@MichlFranken/videos", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UC1FC90ObOrYdfsPposnbbMQ", "So'n Typ im Internet", "https://www.youtube.com/@SonTypimInternet/videos", "%Y-%m-%dT%H:%M:%S%z"]
 ]
 
 #MORE
 moreFeedsInfo = [
     ["https://www.howtoforge.de/feed/", "HowtoForge", "https://www.howtoforge.de/", "%a, %d %b %Y %H:%M:%S %z"],
-    ["https://linux-content.org/feed/", "Linux Content", "https://linux-content.org/", "%a, %d %b %Y %H:%M:%S %z"]
+    ["https://linux-content.org/feed/", "Linux Content", "https://linux-content.org/", "%a, %d %b %Y %H:%M:%S %z"],
+    ["https://netzpalaver.de/feed/", "Netzpalaver", "https://netzpalaver.de/", "%a, %d %b %Y %H:%M:%S %z"]
 ]
 
 newsFeeds = []

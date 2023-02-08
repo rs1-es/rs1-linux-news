@@ -11,6 +11,7 @@ def parseFeed(url, author, homeURL, parseDate, globalFeed):
         try:
             dt = datetime.datetime.strptime(entry.published, parseDate)
         except ValueError:
+            print(entry.published + " does not follow " + parseDate)
             continue
         entry.published = dt.isoformat()
         globalFeed.append([entry.title, entry.link, entry.published, author, homeURL, dt.timestamp()])
@@ -331,7 +332,10 @@ moreFeedsInfo = [
     ["https://myblog.clonbg.es/feedClonbg_es.xml", "Blog de Clonbg", "https://myblog.clonbg.es/", "%a, %d %b %Y %H:%M:%S %z"],
     ["https://cambiatealinux.com/rss", "Cambiate a Linux", "https://cambiatealinux.com/", "%a, %d %b %Y %H:%M:%S %z"],
     ["https://www.bujarra.com/feed/", "Blog Bujarra.com", "https://www.bujarra.com/", "%a, %d %b %Y %H:%M:%S %z"],
-    ["https://56k.es/feed/", "56K", "https://56k.es/", "%a, %d %b %Y %H:%M:%S %z"]
+    ["https://56k.es/feed/", "56K", "https://56k.es/", "%a, %d %b %Y %H:%M:%S %z"],
+    ["https://c3po.website/rss/", "Blog de C3PO", "https://c3po.website/", "%a, %d %b %Y %H:%M:%S %z"],
+    ["http://feeds.feedburner.com/UnBrutoConDebian", "Un bruto con Debian", "https://unbrutocondebian.blogspot.com/", "%Y-%m-%dT%H:%M:%S.%f%z"],
+
 ]
 
 newsFeeds = []

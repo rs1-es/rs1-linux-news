@@ -9,7 +9,12 @@ def parseFeed(url, author, homeURL, parseDate, globalFeed):
     for entry in d.entries:
         if author in ["TOOLinux"]:
             entry.published = entry.updated
-        dt = datetime.datetime.strptime(entry.published, parseDate)
+        dt = 0
+        try:
+            dt = datetime.datetime.strptime(entry.published, parseDate)
+        except ValueError:
+            print(entry.published + " does not follow " + parseDate)
+            continue
         entry.published = dt.isoformat()
         globalFeed.append([entry.title, entry.link, entry.published, author, homeURL, dt.timestamp()])
 
@@ -284,13 +289,16 @@ def createHTMLMore(file, entries):
 
 #NEWS
 newsFeedsInfo = [
-    ["https://www.toolinux.com/spip.php?page=backend", "TOOLinux", "https://www.toolinux.com/", "%Y-%m-%dT%H:%M:%S%z"]
+    ["https://www.toolinux.com/spip.php?page=backend", "TOOLinux", "https://www.toolinux.com/", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://linuxfr.org/news.atom", "LinuxFr.org", "https://linuxfr.org/", "%Y-%m-%dT%H:%M:%S%z"]
 ]
 
 #VIDEOS
 videosFeedsInfo = [
     ["https://www.youtube.com/feeds/videos.xml?channel_id=UCs_AZuYXi6NA9tkdbhjItHQ", "xavki", "https://www.youtube.com/channel/UCs_AZuYXi6NA9tkdbhjItHQ/videos", "%Y-%m-%dT%H:%M:%S%z"],
-    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCq6OWb0pyhv5qPtCINJgdxA", "LinuxInFrench", "https://www.youtube.com/channel/UCq6OWb0pyhv5qPtCINJgdxA/videos", "%Y-%m-%dT%H:%M:%S%z"]
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UCq6OWb0pyhv5qPtCINJgdxA", "LinuxInFrench", "https://www.youtube.com/channel/UCq6OWb0pyhv5qPtCINJgdxA/videos", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UC5M4fqmqLNJaBey0W_ylCSA", "Actualia", "https://www.youtube.com/@Actualia66/videos", "%Y-%m-%dT%H:%M:%S%z"],
+    ["https://www.youtube.com/feeds/videos.xml?channel_id=UC7VqJVFvk75-B0uKg4MWfpw", "Cardiac TuX", "https://www.youtube.com/@Cardiacman/videos", "%Y-%m-%dT%H:%M:%S%z"]
 
 ]
 
